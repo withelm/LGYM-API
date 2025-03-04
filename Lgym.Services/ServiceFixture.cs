@@ -15,6 +15,8 @@ namespace Lgym.Services
 
             context.AddScoped<IUserService, UserService>();
             context.AddSingleton<IRoleService, RoleService>();
+            context.AddScoped<ICurrentUserService, CurrentUserService>();
+            context.AddScoped<IBaseCurrentUserService, BaseCurrentUserService>();
         }
 
 

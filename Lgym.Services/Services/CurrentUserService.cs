@@ -1,7 +1,5 @@
 ﻿using Lgym.Services.Interfaces;
 using Lgym.Services.Models;
-using Microsoft.AspNetCore.Http;
-using System.Security.Claims;
 
 namespace Lgym.Services.Services
 {
@@ -12,30 +10,15 @@ namespace Lgym.Services.Services
         private readonly User _currentUser;
         private readonly IRoleService _roleService;
 
-        public CurrentUserService(IHttpContextAccessor accessor, AppDbContext db, IRoleService roleService)
+        public CurrentUserService(IBaseCurrentUserService baseCurrentUserService, AppDbContext db, IRoleService roleService)
         {
-            _roleService = roleService;
-            var userClaims = accessor.HttpContext?.User;
-            if (userClaims?.Identity is not { IsAuthenticated: true })
+            if (baseCurrentUserService.UserId is null)
             {
-                _isAuthenticated = false;
-                return;
-            }
-
-            var userId = userClaims.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            if (string.IsNullOrEmpty(userId))
-            {
-                _isAuthenticated = false;
-                return;
-            }
-            _currentUser = db.Users.FirstOrDefault(x => x.Id == int.Parse(userId));
-            if (_currentUser is null)
-            {
-
                 _isAuthenticated = false;
                 return;
             }
             _isAuthenticated = true;
+            _currentUser = db.Users.First(x => x.Id == baseCurrentUserService.UserId.Value);
         }
 
         public bool IsAuthenticated => _isAuthenticated;
