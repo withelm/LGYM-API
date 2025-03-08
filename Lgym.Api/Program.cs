@@ -23,11 +23,39 @@ namespace Lgym.Api
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 
-            builder.Services.AddDbContext<AppDbContext>(options =>
-                options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+            builder.Services.AddDbContext<AppDbContext>((sp, options) =>
+            {
+
+                options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
+            });
 
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+            builder.Services.AddSwaggerGen(options =>
+            {
+                options.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme()
+                {
+                    Description = "Wpisz w polu poni¿ej token JWT",
+                    Name = "Authorization",
+                    In = Microsoft.OpenApi.Models.ParameterLocation.Header,
+                    Type = Microsoft.OpenApi.Models.SecuritySchemeType.Http,
+                    Scheme = "bearer",
+                });
+                options.AddSecurityRequirement(new Microsoft.OpenApi.Models.OpenApiSecurityRequirement()
+                {
+                    {
+                        new Microsoft.OpenApi.Models.OpenApiSecurityScheme()
+                        {
+                            Reference = new Microsoft.OpenApi.Models.OpenApiReference()
+                            {
+                                Id = "Bearer",
+                                Type = Microsoft.OpenApi.Models.ReferenceType.SecurityScheme
+                            }
+                        },
+                        new List<string>()
+                    }
+                });
+            });
+            builder.Services.AddHttpContextAccessor();
 
             builder.Services.AddAuthorization(options =>
             {

@@ -1,11 +1,11 @@
-﻿using Lgym.Services.DTOs.UserService;
-using Lgym.Services.Models;
+﻿using Lgym.Services.DTOs;
+using Lgym.Services.DTOs.UserService;
 
 namespace Lgym.Services.Interfaces
 {
     public interface IUserService
     {
-        User Register(RegisterUserDto dto);
-        LoggedUserDto Login(LoginUserDto dto);
+        Task<IdDto> Register(RegisterUserDto dto);
+        Task<LoggedUserDto> Login(LoginUserDto dto);
     }
 }
