@@ -19,11 +19,7 @@ namespace Lgym.Services.Models
         public DbSet<User> Users { get; set; }
         public DbSet<Gym> Gyms { get; set; }
 
-        public override int SaveChanges()
-        {
-            PopulateEntities();
-            return base.SaveChanges();
-        }
+
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
         {
             PopulateEntities();
@@ -34,11 +30,7 @@ namespace Lgym.Services.Models
             PopulateEntities();
             return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
         }
-        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
-        {
-            PopulateEntities();
-            return base.SaveChangesAsync(cancellationToken);
-        }
+
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -153,6 +145,7 @@ namespace Lgym.Services.Models
                         baseModel.ModifiedDate = DateTime.UtcNow;
                         baseModel.ModifiedBy = currentUser;
                     }
+                    ++baseModel.Version;
                 }
             }
 

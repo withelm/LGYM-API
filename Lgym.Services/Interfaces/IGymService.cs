@@ -8,7 +8,7 @@ namespace Lgym.Services.Interfaces
         Task<GymDto> GetAsync(IdDto dto);
         Task<IList<GymDto>> GetAllAsync();
         Task<IdDto> CreateAsync(RegisterGymDto dto);
-        Task UpdateAsync(GymDto dto);
-        Task DeleteAsync(IdDto dto);
+        Task<IdDto> UpdateAsync(GymDto dto);
+        Task<IdDto> DeletedAsync(IdDto dto);
     }
 }

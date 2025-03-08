@@ -16,19 +16,36 @@ namespace Lgym.Services.Services
             _currentUserService = currentUserService;
 
         }
-        public Task<IdDto> CreateAsync(RegisterGymDto dto)
+
+        public async Task<IdDto> CreateAsync(RegisterGymDto dto)
         {
-            throw new NotImplementedException();
+            var entity = new Gym(dto.Name, _currentUserService.CurrentUser);
+            await _dbContext.Gyms.AddAsync(entity);
+            await _dbContext.SaveChangesAsync();
+            return new IdDto(entity.Id);
         }
 
-        public Task DeleteAsync(IdDto dto)
+        public async Task<IdDto> DeletedAsync(IdDto dto)
         {
-            throw new NotImplementedException();
+            var entity = await _dbContext.Gyms.SingleAsync(g => g.Id == dto.Id);
+            entity.SetDeleted();
+            await _dbContext.SaveChangesAsync();
+            return new IdDto(entity.Id);
         }
 
-        public Task<IList<GymDto>> GetAllAsync()
+        public async Task<IList<GymDto>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            IQueryable<Gym> query = _dbContext.Gyms.Include(g => g.Owner);
+            if (!_currentUserService.IsAdmin)
+            {
+                query = query.Where(g => g.Owner == _currentUserService.CurrentUser);
+            }
+            return await query.Select(g => new GymDto
+            {
+                Id = g.Id,
+                Name = g.Name,
+                Owner = new IdDto(g.Owner.Id)
+            }).ToListAsync();
         }
 
         public async Task<GymDto> GetAsync(IdDto dto)
@@ -38,18 +55,22 @@ namespace Lgym.Services.Services
             {
                 query = query.Where(g => g.Owner == _currentUserService.CurrentUser);
             }
-            var result = await query.FirstOrDefaultAsync(g => g.Id == dto.Id);
+            var result = await query.SingleAsync(g => g.Id == dto.Id);
 
             return new GymDto
             {
                 Id = result.Id,
-                Name = result.Name
+                Name = result.Name,
+                Owner = new IdDto(result.Owner.Id)
             };
         }
 
-        public Task UpdateAsync(GymDto dto)
+        public async Task<IdDto> UpdateAsync(GymDto dto)
         {
-            throw new NotImplementedException();
+            var entity = await _dbContext.Gyms.SingleAsync(g => g.Id == dto.Id);
+            entity.Name = dto.Name;
+            await _dbContext.SaveChangesAsync();
+            return new IdDto(entity.Id);
         }
     }
 }

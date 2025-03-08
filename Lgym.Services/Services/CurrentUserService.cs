@@ -18,6 +18,7 @@ namespace Lgym.Services.Services
                 return;
             }
             _isAuthenticated = true;
+            _roleService = roleService;
             _currentUser = db.Users.First(x => x.Id == baseCurrentUserService.UserId.Value);
         }
 

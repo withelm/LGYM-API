@@ -14,9 +14,13 @@ namespace Lgym.Services
             AddConfigurationSingleton<JwtSettings>(context, configuration, "JwtSettings");
 
             context.AddScoped<IUserService, UserService>();
+            context.AddScoped<IGymService, GymService>();
+
+
             context.AddSingleton<IRoleService, RoleService>();
             context.AddScoped<ICurrentUserService, CurrentUserService>();
             context.AddScoped<IBaseCurrentUserService, BaseCurrentUserService>();
+
         }
 
 

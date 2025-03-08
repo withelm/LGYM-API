@@ -10,7 +10,8 @@ namespace Lgym.Services.Models
         }
         public Gym(string name, User owner)
         {
-
+            Name = name;
+            Owner = owner;
         }
 
         [Required]
@@ -18,5 +19,7 @@ namespace Lgym.Services.Models
         public string Name { get; set; }
         [Required]
         public User Owner { get; set; }
+
+
     }
 }

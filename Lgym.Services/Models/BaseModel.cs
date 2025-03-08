@@ -21,5 +21,11 @@ namespace Lgym.Services.Models
         public User? CreatedBy { get; set; }
 
         public User? ModifiedBy { get; set; }
+
+
+        public void SetDeleted(bool isDeleted = true)
+        {
+            IsDeleted = isDeleted;
+        }
     }
 }
