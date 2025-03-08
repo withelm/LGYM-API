@@ -10,12 +10,12 @@ namespace Lgym.Api.Controllers
     [Authorize]
     [ApiController]
     [Route("[controller]")]
-    public class GymsController : Controller
+    public class GymController : Controller
     {
         private readonly AppDbContext _context;
         private readonly IGymService _gymService;
 
-        public GymsController(AppDbContext context, IGymService gymService)
+        public GymController(AppDbContext context, IGymService gymService)
         {
             _context = context;
             _gymService = gymService;
