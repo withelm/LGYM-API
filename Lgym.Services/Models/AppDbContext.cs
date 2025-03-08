@@ -1,6 +1,7 @@
 ﻿using Lgym.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using System.Linq.Expressions;
 
 namespace Lgym.Services.Models
 {
@@ -61,6 +62,26 @@ namespace Lgym.Services.Models
                 if (entityType.IsKeyless)
                 {
                     continue;
+                }
+
+                if (typeof(BaseModel).IsAssignableFrom(entityType.ClrType))
+                {
+                    modelBuilder.Entity(entityType.ClrType).Property(nameof(BaseModel.Version)).HasDefaultValue(0).IsConcurrencyToken();
+
+                    // Stwórz wyrażenie parametru: (e => ...)
+                    var parameter = Expression.Parameter(entityType.ClrType, "e");
+
+                    // Odwołaj się do właściwości IsDeleted: e.IsDeleted
+                    var prop = Expression.Property(parameter, nameof(BaseModel.IsDeleted));
+
+                    // Warunek: e.IsDeleted == false
+                    var condition = Expression.Equal(prop, Expression.Constant(false));
+
+                    // Lambda: (e => e.IsDeleted == false)
+                    var lambda = Expression.Lambda(condition, parameter);
+
+                    // Ustaw filtr
+                    modelBuilder.Entity(entityType.ClrType).HasQueryFilter(lambda);
                 }
 
                 foreach (var property in entityType.GetProperties())

@@ -15,7 +15,8 @@ namespace Lgym.Services.Models
 
         [Required]
         public bool IsDeleted { get; set; } = false;
-
+        [ConcurrencyCheck]
+        public int Version { get; set; } = 0;
 
         public User? CreatedBy { get; set; }
 

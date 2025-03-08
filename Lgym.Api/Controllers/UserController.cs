@@ -14,12 +14,12 @@ namespace Lgym.Api.Controllers
         }
 
         [HttpPost("register")]
-        public IActionResult Register([FromBody] RegisterUserDto dto)
+        public async Task<IActionResult> Register([FromBody] RegisterUserDto dto)
         {
             try
             {
-                var user = _userService.Register(dto);
-                return Ok(user);
+                var result = await _userService.Register(dto);
+                return Ok(result);
             }
             catch (Exception ex)
             {
@@ -28,12 +28,12 @@ namespace Lgym.Api.Controllers
         }
 
         [HttpPost("login")]
-        public IActionResult Login([FromBody] LoginUserDto dto)
+        public async Task<IActionResult> Login([FromBody] LoginUserDto dto)
         {
             try
             {
                 var user = _userService.Login(dto);
-                return Ok(user);
+                return Ok(await user);
             }
             catch (Exception ex)
             {

@@ -1,8 +1,10 @@
 ﻿using Lgym.Services.Configurations;
+using Lgym.Services.DTOs;
 using Lgym.Services.DTOs.UserService;
 using Lgym.Services.Interfaces;
 using Lgym.Services.Models;
 using Lgym.Services.Security;
+using Microsoft.EntityFrameworkCore;
 
 namespace Lgym.Services.Services
 {
@@ -20,10 +22,10 @@ namespace Lgym.Services.Services
             _roleService = roleService;
         }
 
-        public LoggedUserDto Login(LoginUserDto dto)
+        public async Task<LoggedUserDto> Login(LoginUserDto dto)
         {
 
-            var user = _appDbContext.Users.FirstOrDefault(x => x.Login == dto.Login && x.Password == GetHashedPassword(dto));
+            var user = await _appDbContext.Users.FirstOrDefaultAsync(x => x.Login == dto.Login && x.Password == GetHashedPassword(dto));
             if (user == null)
             {
                 throw new Exception("Niepoprawne dane logowania");
@@ -37,9 +39,9 @@ namespace Lgym.Services.Services
 
         }
 
-        public User Register(RegisterUserDto dto)
+        public async Task<IdDto> Register(RegisterUserDto dto)
         {
-            var existingUser = _appDbContext.Users.FirstOrDefault(x => x.Login == dto.Login || x.Email == dto.Email);
+            var existingUser = await _appDbContext.Users.FirstOrDefaultAsync(x => x.Login == dto.Login || x.Email == dto.Email);
             if (existingUser != null)
             {
                 throw new Exception("Użytkownik o podanym loginie lub emailu już istnieje");
@@ -52,9 +54,9 @@ namespace Lgym.Services.Services
                 Password = GetHashedPassword(dto)
             };
 
-            _appDbContext.Users.Add(newUser);
-            _appDbContext.SaveChanges();
-            return newUser;
+            await _appDbContext.Users.AddAsync(newUser);
+            await _appDbContext.SaveChangesAsync();
+            return new IdDto(newUser.Id);
         }
 
 

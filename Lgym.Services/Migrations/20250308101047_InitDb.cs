@@ -25,6 +25,7 @@ namespace Lgym.Services.Migrations
                     CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     ModifiedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: false),
+                    Version = table.Column<int>(type: "integer", nullable: false, defaultValue: 0),
                     CreatedById = table.Column<int>(type: "integer", nullable: true),
                     ModifiedById = table.Column<int>(type: "integer", nullable: true)
                 },
@@ -56,6 +57,7 @@ namespace Lgym.Services.Migrations
                     CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     ModifiedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: false),
+                    Version = table.Column<int>(type: "integer", nullable: false, defaultValue: 0),
                     CreatedById = table.Column<int>(type: "integer", nullable: true),
                     ModifiedById = table.Column<int>(type: "integer", nullable: true)
                 },
