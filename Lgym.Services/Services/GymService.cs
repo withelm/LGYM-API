@@ -27,7 +27,12 @@ namespace Lgym.Services.Services
 
         public async Task<IdDto> DeletedAsync(IdDto dto)
         {
-            var entity = await _dbContext.Gyms.SingleAsync(g => g.Id == dto.Id);
+            var query = _dbContext.Gyms.Where(g => g.Id == dto.Id);
+            if (!_currentUserService.IsAdmin)
+            {
+                query = query.Where(g => g.Owner == _currentUserService.CurrentUser);
+            }
+            var entity = await query.SingleAsync();
             entity.SetDeleted();
             await _dbContext.SaveChangesAsync();
             return new IdDto(entity.Id);
@@ -67,7 +72,13 @@ namespace Lgym.Services.Services
 
         public async Task<IdDto> UpdateAsync(GymDto dto)
         {
-            var entity = await _dbContext.Gyms.SingleAsync(g => g.Id == dto.Id);
+            var query = _dbContext.Gyms.Where(g => g.Id == dto.Id);
+            if (!_currentUserService.IsAdmin)
+            {
+                query = query.Where(g => g.Owner == _currentUserService.CurrentUser);
+            }
+
+            var entity = await query.SingleAsync();
             entity.Name = dto.Name;
             await _dbContext.SaveChangesAsync();
             return new IdDto(entity.Id);

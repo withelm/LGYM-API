@@ -40,3 +40,4 @@ namespace Lgym.Resources.Attributes
             }
         }
     }
+}

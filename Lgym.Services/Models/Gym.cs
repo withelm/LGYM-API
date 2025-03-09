@@ -1,8 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Lgym.Services.Interfaces;
+using System.ComponentModel.DataAnnotations;
 
 namespace Lgym.Services.Models
 {
-    public class Gym : BaseModel
+    public class Gym : BaseModel, IOwner
     {
         protected Gym()
         {

@@ -18,6 +18,7 @@ namespace Lgym.Services.Models
 
         public DbSet<User> Users { get; set; }
         public DbSet<Gym> Gyms { get; set; }
+        public DbSet<Exercise> Exercises { get; set; }
 
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
@@ -87,6 +88,21 @@ namespace Lgym.Services.Models
                         property.SetValueConverter(nullableDateTimeConverter);
                     }
                 }
+            }
+
+            // Wyszukujemy wszystkie właściwości typu enum
+            var enumProperties = modelBuilder.Model
+                .GetEntityTypes()
+                .SelectMany(t => t.GetProperties())
+                .Where(p => p.ClrType.IsEnum);
+
+            // Dla każdej z nich ustawiamy konwerter na string
+            foreach (var property in enumProperties)
+            {
+                var enumType = property.ClrType;
+                var converterType = typeof(EnumToStringConverter<>).MakeGenericType(enumType);
+                var converter = (ValueConverter)Activator.CreateInstance(converterType);
+                property.SetValueConverter(converter);
             }
 
             modelBuilder.Entity<User>(entity =>
