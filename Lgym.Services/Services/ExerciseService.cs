@@ -53,7 +53,7 @@ namespace Lgym.Services.Services
             IQueryable<Exercise> query = _dbContext.Exercises.Include(g => g.Owner);
             if (!_currentUserService.IsAdmin)
             {
-                query = query.Where(g => g.Owner == _currentUserService.CurrentUser);
+                query = query.Where(g => g.Owner == _currentUserService.CurrentUser || g.IsGlobal);
             }
             return await query.Select(g => new ExerciseDto
             {
