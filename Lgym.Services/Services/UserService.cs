@@ -28,7 +28,7 @@ namespace Lgym.Services.Services
             var user = await _appDbContext.Users.FirstOrDefaultAsync(x => x.Login == dto.Login && x.Password == GetHashedPassword(dto));
             if (user == null)
             {
-                throw new Exception("Niepoprawne dane logowania");
+                throw new Exception(Resources.Resources.Error.Authorisation);
             }
             return new LoggedUserDto()
             {
@@ -44,7 +44,7 @@ namespace Lgym.Services.Services
             var existingUser = await _appDbContext.Users.FirstOrDefaultAsync(x => x.Login == dto.Login || x.Email == dto.Email);
             if (existingUser != null)
             {
-                throw new Exception("Użytkownik o podanym loginie lub emailu już istnieje");
+                throw new Exception(Resources.Resources.Validation.UserExist);
             }
             var newUser = new User
             {

@@ -24,7 +24,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Enums\" />
     <Folder Include="Migrations\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Lgym.Resources\Lgym.Resources.csproj" />
   </ItemGroup>
 
 </Project>

@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.34929.205
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lgym.Api", "Lgym.Api.csproj", "{F5DC1D90-82A8-4615-B444-A38E9DD62F9D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lgym.Api", "Lgym.Api.csproj", "{F5DC1D90-82A8-4615-B444-A38E9DD62F9D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lgym.Services", "..\Lgym.Services\Lgym.Services.csproj", "{4B7E8B86-6268-4BCC-9F33-46B0C6387B36}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lgym.Services", "..\Lgym.Services\Lgym.Services.csproj", "{4B7E8B86-6268-4BCC-9F33-46B0C6387B36}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lgym.Resources", "..\Lgym.Resources\Lgym.Resources.csproj", "{8CBCAFAA-8918-455E-8C8E-52E3D03419CF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{4B7E8B86-6268-4BCC-9F33-46B0C6387B36}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4B7E8B86-6268-4BCC-9F33-46B0C6387B36}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4B7E8B86-6268-4BCC-9F33-46B0C6387B36}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8CBCAFAA-8918-455E-8C8E-52E3D03419CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CBCAFAA-8918-455E-8C8E-52E3D03419CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CBCAFAA-8918-455E-8C8E-52E3D03419CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CBCAFAA-8918-455E-8C8E-52E3D03419CF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

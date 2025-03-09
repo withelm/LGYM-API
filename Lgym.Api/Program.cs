@@ -4,6 +4,7 @@ using Lgym.Services.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using System.Globalization;
 using System.Text;
 
 namespace Lgym.Api
@@ -56,6 +57,22 @@ namespace Lgym.Api
                 });
             });
             builder.Services.AddHttpContextAccessor();
+            builder.Services.AddLocalization(options =>
+            {
+                options.ResourcesPath = "Resources";
+
+            });
+            builder.Services.Configure<RequestLocalizationOptions>(options =>
+            {
+                var supportedCultures = new[]
+                {
+                    new CultureInfo("en"),
+                    new CultureInfo("pl")
+                };
+                options.DefaultRequestCulture = new Microsoft.AspNetCore.Localization.RequestCulture("en");
+                options.SupportedCultures = supportedCultures;
+
+            });
 
             builder.Services.AddAuthorization(options =>
             {
@@ -68,6 +85,8 @@ namespace Lgym.Api
             AddJwt(builder, builder.Configuration);
 
             var app = builder.Build();
+
+            app.UseRequestLocalization();
 
             using (var scope = app.Services.CreateScope())
             {
