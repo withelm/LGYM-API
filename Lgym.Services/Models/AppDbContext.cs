@@ -19,6 +19,9 @@ namespace Lgym.Services.Models
         public DbSet<User> Users { get; set; }
         public DbSet<Gym> Gyms { get; set; }
         public DbSet<Exercise> Exercises { get; set; }
+        public DbSet<Plan> Plans { get; set; }
+        public DbSet<PlanDay> PlanDays { get; set; }
+        public DbSet<PlanDayExercise> PlanDayExercises { get; set; }
 
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)

@@ -1,4 +1,4 @@
-﻿using Lgym.Services.DTOs.GymService;
+﻿using Lgym.Services.DTOs.PlanService;
 using Lgym.Services.Interfaces;
 using Lgym.Services.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -9,16 +9,19 @@ namespace Lgym.Api.Controllers
     [Authorize]
     [ApiController]
     [Route("[controller]")]
-    public class GymController : BaseController<GymDto, RegisterGymDto>
+    public class PlanController : BaseController<PlanDto, RegisterPlanDto>
     {
         private readonly AppDbContext _context;
-        private readonly IGymService _gymService;
+        private readonly IPlanService _planService;
 
-        public GymController(AppDbContext context, IGymService gymService) : base(gymService)
+        public PlanController(AppDbContext context, IPlanService planService) : base(planService)
         {
             _context = context;
-            _gymService = gymService;
+            _planService = planService;
         }
+
+
+
 
     }
 }

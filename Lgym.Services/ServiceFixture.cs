@@ -17,6 +17,9 @@ namespace Lgym.Services
             context.AddScoped<IGymService, GymService>();
             context.AddScoped<IEnumService, EnumService>();
             context.AddScoped<IExerciseService, ExerciseService>();
+            context.AddScoped<IPlanService, PlanService>();
+            context.AddScoped<IPlanDayService, PlanDayService>();
+            context.AddScoped<IPlanDayExerciseService, PlanDayExerciseService>();
 
             context.AddSingleton<IRoleService, RoleService>();
             context.AddScoped<ICurrentUserService, CurrentUserService>();

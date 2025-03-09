@@ -3,6 +3,7 @@ using System;
 using Lgym.Services.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Lgym.Services.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250309195052_AddPlan")]
+    partial class AddPlan
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -150,9 +153,6 @@ namespace Lgym.Services.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("Order")
-                        .HasColumnType("integer");
-
                     b.Property<int>("OwnerId")
                         .HasColumnType("integer");
 
@@ -243,12 +243,6 @@ namespace Lgym.Services.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
 
-                    b.Property<double>("MaxReps")
-                        .HasColumnType("double precision");
-
-                    b.Property<double>("MinReps")
-                        .HasColumnType("double precision");
-
                     b.Property<int?>("ModifiedById")
                         .HasColumnType("integer");
 
@@ -259,9 +253,6 @@ namespace Lgym.Services.Migrations
                         .HasColumnType("integer");
 
                     b.Property<int>("PlanDayId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("Reps")
                         .HasColumnType("integer");
 
                     b.Property<int>("Version")
