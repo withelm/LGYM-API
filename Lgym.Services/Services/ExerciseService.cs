@@ -98,12 +98,6 @@ namespace Lgym.Services.Services
             if (_currentUserService.IsAdmin)
             {
                 entity.IsGlobal = dto.IsGlobal;
-
-                var isExistTranslation = Resources.Resources.Exercise.ResourceManager.GetString(dto.Name);
-                if (string.IsNullOrEmpty(isExistTranslation))
-                {
-                    throw new ArgumentOutOfRangeException(nameof(dto.Name));
-                }
             }
             await _dbContext.SaveChangesAsync();
             return new IdDto(entity.Id);

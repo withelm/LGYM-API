@@ -118,13 +118,13 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="BodyPart_Chest" xml:space="preserve">
-    <value>Klatka</value>
+    <value>Klata</value>
   </data>
   <data name="BodyPart_Back" xml:space="preserve">
     <value>Plecy</value>
   </data>
   <data name="BodyPart_Shoulders" xml:space="preserve">
-    <value>Ramiona</value>
+    <value>Barki</value>
   </data>
   <data name="BodyPart_Biceps" xml:space="preserve">
     <value>Biceps</value>
@@ -139,10 +139,10 @@
     <value>Brzuch</value>
   </data>
   <data name="BodyPart_Quads" xml:space="preserve">
-    <value>Czworogłowe</value>
+    <value>Czworogłowe uda</value>
   </data>
   <data name="BodyPart_Hamstrings" xml:space="preserve">
-    <value>Ścięgna podkolanowe</value>
+    <value>Dwógłowe uda</value>
   </data>
   <data name="BodyPart_Calves" xml:space="preserve">
     <value>Łydki</value>
@@ -151,10 +151,10 @@
     <value>Pośladki</value>
   </data>
   <data name="BodyPart_Traps" xml:space="preserve">
-    <value>Pupa</value>
+    <value>Czworoboczny grzbietu</value>
   </data>
   <data name="BodyPart_Lats" xml:space="preserve">
-    <value>Sutki</value>
+    <value>Najszerszy grzbietu</value>
   </data>
   <data name="BodyPart_Neck" xml:space="preserve">
     <value>Szyja</value>
